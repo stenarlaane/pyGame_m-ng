@@ -1,20 +1,18 @@
 import pygame
+from settings import Settings
 
-background_color = (100, 7, 163)
-screen_width = 800
-screen_height = 600
-
-screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Bubble Blaster!")
-
-screen.fill(background_color)
-
-pygame.display.flip()
-
+pygame.init()
+gm_set = Settings()
+screen = pygame.display.set_mode((gm_set.screen_width, gm_set.screen_height))
+pygame.display.set_caption(gm_set.caption)
 running = True
 
 while running:
     for event in pygame.event.get():
-        if event.type == pygame.quit:
+        if event.type == pygame.QUIT:
             running = False
+
+    screen.fill(gm_set.bg_color)
+    
+    pygame.display.flip()
 pygame.quit()
