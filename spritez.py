@@ -18,8 +18,10 @@ class Player(pygame.sprite.Sprite):
         self.moving_up = False
         self.moving_down = False
 
+
     def blit_me(self):
         self.screen.blit(self.player, self.rect)
+
 
     def update(self):
         if self.moving_right:

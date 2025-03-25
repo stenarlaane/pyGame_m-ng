@@ -1,6 +1,7 @@
 import pygame
 import sys
 
+
 def check_events(player):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -23,6 +24,7 @@ def check_events(player):
                 player.moving_up = False
             if event.key == pygame.K_DOWN:
                 player.moving_down = False
+
 
 def update_screen(game_settings, screen, player):
     screen.fill(game_settings.bg_color)
