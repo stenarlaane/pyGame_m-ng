@@ -47,11 +47,15 @@ def create_bubble(gm_set, screen, bubbles):
     bubbles.add(new_bubble)
 
 
-def update_bubbles(player, bubbles, stats, sb):
+def update_bubbles(player, bubbles, stats, sb, gm_set):
     hitted_bubble = pygame.sprite.spritecollideany(player, bubbles)
     if hitted_bubble != None:
         stats.score += hitted_bubble.bubble_radius
         sb.prepare_score()
+        if (int(stats.score / gm_set.bonus_score)) > stats.bonus:
+            stats.level += 1
+            sb.prepare_level()
+            stats.bonus += 1
         hitted_bubble.kill()
 
 
