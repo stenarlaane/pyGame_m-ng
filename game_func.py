@@ -1,8 +1,14 @@
 import pygame
 import sys
+from bubble import Bubble
 
 
-def check_events(player):
+pygame.init()
+ADDBUBBLE = pygame.USEREVENT + 1
+pygame.time.set_timer(ADDBUBBLE, 250)
+
+
+def check_events(gm_set, screen, player, bubbles):
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
@@ -24,9 +30,18 @@ def check_events(player):
                 player.moving_up = False
             if event.key == pygame.K_DOWN:
                 player.moving_down = False
+        elif event.type == ADDBUBBLE:
+            create_bubble(gm_set, screen, bubbles)
 
 
-def update_screen(game_settings, screen, player):
-    screen.fill(game_settings.bg_color)
+def create_bubble(gm_set, screen, bubbles):
+    new_bubble = Bubble(screen, gm_set)
+    bubbles.add(new_bubble)
+
+
+def update_screen(gm_set, screen, player, bubbles):
+    screen.fill(gm_set.bg_color)
     player.blit_me()
+    for bubble in bubbles:
+        bubble.blit_me()
     pygame.display.flip()

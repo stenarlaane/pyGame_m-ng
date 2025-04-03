@@ -1,6 +1,7 @@
 import pygame
 from settings import Settings
 from spritez import Player
+from bubble import Bubble
 import game_func as gf
 
 
@@ -10,10 +11,13 @@ screen = pygame.display.set_mode((gm_set.screen_width, gm_set.screen_height))
 pygame.display.set_caption(gm_set.caption)
 running = True
 player = Player(screen)
+bubble = Bubble(screen, gm_set)
+bubbles = pygame.sprite.Group()
 while True:
-    gf.check_events(player)
+    gf.check_events(gm_set, screen, player, bubbles)
     player.update()
-    gf.update_screen(gm_set, screen, player)
+    bubbles.update()
+    gf.update_screen(gm_set, screen, player, bubbles)
 
 while running:
     for event in pygame.event.get():
@@ -22,6 +26,5 @@ while running:
 
     screen.fill(gm_set.bg_color)
     gf.check_events()
-    player.blit_me()
     pygame.display.flip()
 pygame.quit()
