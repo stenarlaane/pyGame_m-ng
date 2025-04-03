@@ -39,9 +39,16 @@ def create_bubble(gm_set, screen, bubbles):
     bubbles.add(new_bubble)
 
 
-def update_screen(gm_set, screen, player, bubbles):
+def update_bubbles(player, bubbles):
+    hitted_bubble = pygame.sprite.spritecollideany(player, bubbles)
+    if hitted_bubble != None:
+        hitted_bubble.kill()
+
+
+def update_screen(gm_set, screen, player, bubbles, clock):
     screen.fill(gm_set.bg_color)
     player.blit_me()
     for bubble in bubbles:
         bubble.blit_me()
+    clock.tick(30)    
     pygame.display.flip()
